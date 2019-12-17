@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.modal.Course;
+import com.example.demo.modal.dto.CourseDto;
 import com.example.demo.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

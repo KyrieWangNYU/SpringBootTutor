@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.modal.Course;
+import com.example.demo.modal.TwoSum;
 import com.example.demo.modal.dto.CourseDto;
 import com.example.demo.service.CourseService;
+import com.example.demo.service.NumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -22,14 +24,17 @@ public class CourseController {
 
     @Autowired // IOC 控制反转
     CourseService courseService; // Singleton
+    @Autowired
+    NumService numService;
     //依赖注入 Dependency Injection
 
-    @GetMapping(path = "/", produces = "application/json") //如果你用get方法 call我这个地址
-    public HttpEntity findAllCourses(){
-        List<Course> allCourses = courseService.findAllCourses(); //我就帮你用这个方法来处理这个请求
 
-        return new ResponseEntity<>(allCourses,HttpStatus.OK); // 我返回结果给你
-    }
+//    @GetMapping(path = "/", produces = "application/json") //如果你用get方法 call我这个地址
+//    public HttpEntity findAllCourses(){
+//        List<Course> allCourses = courseService.findAllCourses(); //我就帮你用这个方法来处理这个请求
+//
+//        return new ResponseEntity<>(allCourses,HttpStatus.OK); // 我返回结果给你
+//    }
 
 //    @GetMapping(path = "/api/course/findAllCourses", produces = "application/json")
 //    public HttpEntity<List<CourseDto>> findAllCourses(){
@@ -37,6 +42,13 @@ public class CourseController {
 //
 //        return new ResponseEntity<>(allCourses, HttpStatus.OK);
 //    }
+
+    @GetMapping(path = "/result", produces = "application/json") //如果你用get方法 call我这个地址
+    public HttpEntity twoSum(){
+        List<TwoSum> result = numService.findNumbers(); //我就帮你用这个方法来处理这个请求
+
+        return new ResponseEntity<>(result,HttpStatus.OK); // 我返回结果给你
+    }
 
     @GetMapping(path = "/look-up/{inputString}", produces = "application/json")
     public HttpEntity<Course> searchCourse(@PathVariable("inputString") String inputString) {
